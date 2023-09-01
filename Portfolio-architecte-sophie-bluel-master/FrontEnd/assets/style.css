@@ -1,0 +1,564 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: #B1663C;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/** end reset css**/
+body {
+	max-width: 1140px;
+	margin:auto;
+	font-family: 'Work Sans' ;
+	font-size: 14px;
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
+.oldHeader {
+	display: flex;
+	justify-content: space-between;
+	margin: 50px 0
+}
+
+.headerEdit {
+	background-color: #000000;
+	margin-top: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+}
+
+.headerEdit button {
+	border-radius: 60px;
+	width: 180px;
+	height: 30px;
+	background-color: rgb(255, 255, 255);
+	margin-left: 20px;
+}
+
+.headerEdit p {
+	color: #FFFFFF;
+}
+
+.modified {
+	width: 18px;
+}
+
+section {
+	margin: 50px 0
+}
+
+.erreur {
+	color: red;
+	display: none;
+}
+
+h1{
+	display: flex;
+	flex-direction: column;
+	font-family: 'Syne';
+	font-size: 22px;
+	font-weight: 800;
+	color: #B1663C
+}
+
+h1 > span {
+	font-family: 'Work Sans';
+	font-size:10px;
+	letter-spacing: 0.1em;
+}
+
+h2{
+	font-family: 'Syne';
+	font-weight: 700;
+	font-size: 30px;
+	color: #1D6154;
+	text-align: center;
+	padding-bottom: 30px;
+}
+
+nav ul {
+	display: flex;
+	align-items: center;
+	list-style-type: none;
+}
+
+nav li {
+	padding: 0 10px;
+	font-size: 1.2em;
+	cursor: pointer;
+}
+
+li:hover {
+	color: #B1663C;
+}
+
+li img {
+	width: 20px;
+}
+
+.login_selected {
+	font-weight: bold;
+	cursor: context-menu;
+}
+
+.login_selected:hover {
+	color: black;
+}
+
+.mdp {
+	color: #3d3d3d;
+	display: flex;
+	justify-content: center;
+	text-decoration: underline;
+}
+
+#introduction {
+	display: flex;
+	align-items: center;
+	padding-top: 50px;
+	padding-bottom: 80px;
+}
+
+#introduction figure {
+	flex: 1
+}
+
+#introduction img {
+	display: block;
+	margin: auto;
+	width: 80%;
+}
+
+#introduction article {
+	flex: 1
+}
+#introduction h2 {
+	margin-bottom: 1em;
+}
+
+#introduction p {
+	margin-bottom: 0.5em;
+}
+
+#introduction .modifierDiv {
+	padding-left: 57px;
+	padding-top: 13px;
+	display: flex;
+	flex-direction: row;
+	width: 18px;
+}
+
+.modifie {
+	cursor: pointer;
+	margin-left: 5px;
+}
+
+#portfolio {
+	display: flex;
+	flex-direction: column;
+}
+
+.content {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-left: 40px;
+}
+
+.modifierDiv {
+	padding-left: 40px;
+	padding-bottom: 30px;
+}
+
+.gallery {
+	order: 2;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 30px;
+}
+
+.gallery img {
+	width: 100%;
+	height: 100%;
+}
+
+#contact {
+	width: 50%;
+	margin: auto;
+}
+
+#contact > * {
+	text-align: center;
+}
+
+#contact h2 {
+	margin-bottom: 20px;
+}
+
+#contact form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#contact input {
+	height: 50px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#contact label {
+	margin: 2em 0 1em 0;
+}
+
+#contact textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+#submit {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+}
+
+.categories {
+	order: 1;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding-bottom: 50px;
+}
+
+.unshow {
+	display: none;
+}
+
+.categories span {
+	border-radius: 60px;
+	border: 1px solid #1D6154;
+	box-sizing: border-box;
+	color: #1D6154;
+	font-family: 'Syne';
+	text-align: center;
+	padding: 10px;
+	margin: 10px;
+}
+
+.modifier {
+	cursor: pointer;
+}
+
+/*Start modale*/
+#modale {
+    width: 630px;
+    height: auto;
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+    right: 25%;
+    left: 25%;
+}
+
+.modaleContent {
+    border-bottom: 1px solid #b3b3b3;
+    padding-bottom: 70px;
+	justify-self: center;
+}
+
+.fa-xmark {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: black;
+}
+
+#modale img {
+	width: 100px;
+	height: 100%;
+}
+
+.photos {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 20px;
+	grid-row-gap: 20px;
+}
+
+.projet {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+
+#modale h1 {
+    display: flex;
+    justify-content: center;
+    font-family: 'Work Sans';
+	font-weight: 400;
+	color: #000000;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}
+
+.addPhoto {
+    background-color: #1D6154;
+    color: #FFFFFF;
+    border-radius: 60px;
+    border: none;
+    width: 237px;
+    height: 36px;
+	margin-top: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	justify-self: center;
+}
+
+.remove {
+    background-color: #000000;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    position: absolute;
+	display: grid;
+    top: 10px;
+    right: 10px;
+}
+
+.fa-trash-can {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    justify-self: center;
+	align-self: center;
+}
+
+#modale p {
+    color: #D65353;
+	margin-top: 30px;
+	margin-bottom: 50px;
+    font-family: "Syne";
+	justify-self: center;
+}
+/*End modale*/
+
+/*Start modale ajout photo*/
+#addPhotoModale {
+    display: none;
+	border: none;
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+	justify-content: space-evenly;
+    width: 630px;
+    height: 670px;
+    top: 370px;
+    left: 25%;
+	right: 25%;
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+	
+}
+
+.fa-arrow-left {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-decoration: none;
+    color: #000000;
+}
+
+#addPhotoModale .fa-xmark {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#addPhotoModale h1 {
+	width: 150px;
+	height: 30px;
+	top: 720px;
+	left: 645px;
+	font-family: Work Sans;
+	font-size: 26px;
+	font-weight: 400;
+	line-height: 30px;
+	letter-spacing: 0em;
+	text-align: center;
+	color: #000000;
+}
+
+.addPhotoDiv {
+    text-align: center;
+    width: 420px;
+    height: 169px;
+    border-radius: 3px;
+    background-color: #E8F1F6;
+    position: relative;
+    display: grid;
+}
+
+.addPhotoDiv img {
+    color: #B9C5CC;
+    position: absolute;
+    justify-self: center;
+    align-self: flex-start;
+    padding-top: 20px;
+	width: 70px;
+}
+
+.plusAddPhoto {
+    width: 173px;
+    height: 36px;
+    border-radius: 50px;
+    background-color: #CBD6DC;
+	color: #306685;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30%;
+    position: absolute;
+    top: 100px;
+    border: none;
+	cursor: pointer;
+}
+
+.chooseFile {
+	position: absolute;
+	top: 106px;
+	right: 90px;
+	width: 200px;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.addPhotoDiv span {
+    font-family: 'Work Sans';
+    font-weight: 400;
+    text-align: center;
+    font-size: 10px;
+    line-height: 12px;
+    letter-spacing: 0em;
+    display: flex;
+    justify-content: center;
+    margin-top: 140px;
+    color: #444444;
+}
+
+#addPhotoModale form {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #b3b3b3;
+    padding-bottom: 50px;
+}
+
+label {
+    padding-top: 30px;
+	padding-bottom: 10px;
+	display: flex;
+	color: #3d3d3d;
+}
+
+#title , #categorie {
+    width: 420px;
+    height: 51px;
+    border: none;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 14px 0px #00000017;
+}
+
+.validButton {
+    width: 237px;
+    height: 36px;
+    border-radius: 60px;
+    background-color: #A7A7A7;
+    color: #FFFFFF;
+    font-family: 'Syne';
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16.8px;
+    margin-top: 50px;
+    border: none;
+}
+/*End modale ajout photo*/
+
+footer nav ul {
+	display: flex;
+	justify-content: flex-end;
+	margin: 2em
+}
+
