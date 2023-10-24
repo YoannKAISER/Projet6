@@ -57,16 +57,17 @@ table {
 }
 /** end reset css**/
 body {
-	max-width: 1140px;
-	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
 
-header {
+.firstHeader {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	max-width: 1440px;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .oldHeader {
@@ -94,6 +95,11 @@ header {
 
 .headerEdit p {
 	color: #FFFFFF;
+}
+
+main {
+	max-width: 1140px;
+	margin: auto;
 }
 
 .modified {
@@ -223,7 +229,9 @@ li img {
 	padding-left: 40px;
 }
 
-.modifierDiv {
+#portfolio .modifierDiv {
+	display: flex;
+	align-items: baseline;
 	padding-left: 40px;
 	padding-bottom: 30px;
 }
@@ -240,6 +248,7 @@ li img {
 .gallery img {
 	width: 100%;
 	height: 100%;
+	object-fit: cover;
 }
 
 #contact {
@@ -313,8 +322,14 @@ li img {
 	margin: 10px;
 }
 
+.categories span:focus {
+	background-color: #1D6154;
+	color: #FFFFFF;
+}
+
 .modifier {
 	cursor: pointer;
+	margin-left: 5px;
 }
 
 /*Start modale*/
@@ -349,6 +364,7 @@ li img {
 #modale img {
 	width: 100px;
 	height: 100%;
+	object-fit: cover;
 }
 
 .photos {

@@ -1,4 +1,59 @@
-fetch("http://localhost:5678/api/works")
+function filterColor(activeFilter) {
+	let categories = document.querySelector(".categories");
+	let colorSpan = categories.getElementsByTagName("span");
+		Array.from(colorSpan).forEach((element) => {
+			element.style.backgroundColor = "#FFFFFF"
+			element.style.color = "#1D6154"
+		})
+		activeFilter.style.backgroundColor = "#1D6154";
+		activeFilter.style.color = "#FFFFFF";
+}
+
+fetch("http://localhost:5678/api/categories")
+	.then(response => response.json())
+	.then(data => {
+		let portfolio = document.getElementById("portfolio");
+		const token = sessionStorage.getItem("token");
+		let categories = document.createElement("div");
+		categories.classList.add("categories");
+		if (token !== null) {
+		categories.style.display = "none";}
+		portfolio.appendChild(categories);
+		let Tous = document.createElement("span");
+		Tous.innerHTML = "Tous";
+		Tous.style.cursor = "pointer";
+		Tous.addEventListener("click", function(event) {
+			let gallery = document.getElementsByClassName("gallery");
+			let galleryWork = document.getElementsByClassName("galleryWork");
+			Array.from(galleryWork).filter(function(work) {
+				let img = work.getElementsByTagName("img")[0];
+				work.classList.remove("unshow");
+			});
+			filterColor(Tous);
+		});
+		categories.appendChild(Tous);
+		data.forEach(element => {
+			let span = document.createElement("span");
+			span.innerHTML = element.name;
+			span.dataset.idCategory = element.id;
+			span.style.cursor = "pointer";
+			span.addEventListener("click", function(event) {
+				let gallery = document.getElementsByClassName("gallery");
+				let galleryWork = document.getElementsByClassName("galleryWork");
+				Array.from(galleryWork).filter(function(work) {
+					let img = work.getElementsByTagName("img")[0];
+					if (img.dataset.categoryId != event.target.dataset.idCategory) {
+						work.classList.add("unshow")
+					}
+					else {work.classList.remove("unshow")};
+				});
+				filterColor(span);
+			});
+			categories.appendChild(span);
+		});
+	});
+
+    fetch("http://localhost:5678/api/works")
 	.then(response => response.json())
 	.then(data => {
 		let gallery = document.getElementsByClassName("gallery")[0];
@@ -129,7 +184,6 @@ window.addEventListener("load", function (event) {
 	const addWorkForm = document.getElementById("addWorkForm");
 	addWorkForm.addEventListener("change", function(event) {
 		checkFormComplete();
-		
 	})
 	fillSelectCategorieOptions();
 });
@@ -150,7 +204,6 @@ function checkFormComplete() {
 			validButton.disabled = true;
 			validButton.style.cursor = "default";
 		}
-		
 };
 
 function fillSelectCategorieOptions() {
@@ -210,6 +263,7 @@ function sendWork(image, title, categorie) {
 			workAdd.style.display = "grid";
 			addPhotoModale.style.display = "none";
 			modale.style.display = "grid";
+			emptyForm();
 			addPhotoToModale(data);
 	})
 	.catch(error => {
@@ -217,11 +271,63 @@ function sendWork(image, title, categorie) {
 	})
 };
 
+function emptyForm() {
+	const chooseFileInput = document.getElementsByClassName("chooseFile")[0];
+	const titleInput = document.getElementById("title");
+	const categorySelect = document.getElementById("categorie");
+	chooseFileInput.value = "";
+	titleInput.value = "";
+	categorySelect.value = "";
+	const img = document.querySelector(".addPhotoImg");
+	img.src = "assets/Group.png";
+	img.style.width = "70px";
+	img.style.height = "55px";
+	img.style.paddingTop = "20px";
+
+}
+
 window.addEventListener("load", function(event) {
 	const closeModale = document.getElementsByClassName("fa-xmark")[1];
 	closeModale.addEventListener("click", function (event) {
 		addPhotoModale.style.display = "none";
 		document.getElementsByTagName("body")[0].style.background = "rgb(255, 255, 255)";
+		emptyForm();
 	});
 });
 //End addPhotoModale
+
+
+function verifyToken() {
+	const token = sessionStorage.getItem("token");
+	const headerEdit = document.querySelector(".headerEdit");
+	const login = document.querySelector(".login");
+	const logout = document.querySelector(".logout");
+	const modifier = document.getElementsByClassName("modifierDiv")[0];
+	const modifie = document.getElementsByClassName("modifierDiv")[1];
+
+	if (token == null) {
+		console.log("non connecté");
+		headerEdit.style.display = "none";
+		login.style.display = "flex";
+		logout.style.display = "none";
+		modifier.style.display = "none";
+		modifie.style.display = "none";
+	}
+	else {console.log("connecté")
+		login.style.display = "none";
+		logout.style.display = "flex";
+	}
+};
+
+function logout() {
+	let logout = document.querySelector(".logout");
+	logout.addEventListener("click", function(event) {
+		sessionStorage.removeItem("token");
+		location.reload();
+	})
+};
+
+window.addEventListener("load", function(event) {
+	verifyToken();
+	logout();
+});

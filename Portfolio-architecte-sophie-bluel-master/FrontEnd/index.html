@@ -8,25 +8,35 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/e568d6082c.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
-	<script src="../Backend/fetch.js"></script>
+	<script src="../Backend/script.js"></script>
 </head>
 <body>
-<header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+<header class="headerEdit">
+	<p>Mode édition</p>
+    <button>publier les changements</button>
+</header>
+<main>
+    <div class="oldHeader">
+        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="./login.html">login</a></li>
+			<li><a href="./login.html" class="login">login</a></li>
+            <li><a class="logout">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
-</header>
-<main>
+    </div>
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<div class="modifierDiv">
+				<img src="assets/Group(1).png" alt="modified" class="modified">
+            	<span class="modifie">modifier</span>
+			</div>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -36,7 +46,41 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+        <div class="content">
+		    <h2>Mes Projets</h2>
+			<div class="modifierDiv">
+				<img src="assets/Group(1).png" alt="modified">
+            	<span class="modifier">modifier</span>
+			</div>
+            <aside id="modale">
+                <i class="fa-solid fa-xmark"></i>
+                <div class="modaleContent">
+                    <h1>Galerie photo</h1>
+                    <div class="photos"></div>
+                </div>
+                <button class="addPhoto">Ajouter une photo</button>
+				<p>Supprimer la galerie</p>
+            </aside>
+			<aside id="addPhotoModale">
+				<i class="fa-solid fa-arrow-left"></i>
+				<i class="fa-solid fa-xmark"></i>
+				<h1>Ajout photo</h1>
+				<div class="addPhotoDiv">
+					<img src="assets/Group.png" alt="Image" class="addPhotoImg">
+					<button class="plusAddPhoto">+ Ajouter photo</button>
+					<input type="file" class="chooseFile">
+					<span>jpg, png : 4mo max</span>
+				</div>
+				<form action="#" id="addWorkForm">
+					<label for="title">Titre</label>
+					<input type="text" name="title" id="title">
+					<label for="categorie">Catégorie</label>
+					<select name="categorie" id="categorie">
+					</select>
+				</form>
+				<button class="validButton">Valider</button>
+			</aside>    
+        </div>
 		<div class="gallery">
 		</div>
 	</section>
