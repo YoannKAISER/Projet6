@@ -22,8 +22,8 @@
         <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
+			<li><a href="#portfolio">projets</a></li>
+			<li><a href="#contact">contact</a></li>
 			<li><a href="./login.html" class="login">login</a></li>
             <li><a class="logout">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
@@ -68,9 +68,10 @@
 				<div class="addPhotoDiv">
 					<img src="assets/Group.png" alt="Image" class="addPhotoImg">
 					<button class="plusAddPhoto">+ Ajouter photo</button>
-					<input type="file" class="chooseFile">
+					<input type="file" class="chooseFile" accept="image/png, image/jpg">
 					<span>jpg, png : 4mo max</span>
 				</div>
+				<p class="errorMaxSizeFile">L'image doit faire 4mo maximum</p>
 				<form action="#" id="addWorkForm">
 					<label for="title">Titre</label>
 					<input type="text" name="title" id="title">

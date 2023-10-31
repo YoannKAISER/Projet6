@@ -22,6 +22,8 @@ fetch("http://localhost:5678/api/categories")
 		let Tous = document.createElement("span");
 		Tous.innerHTML = "Tous";
 		Tous.style.cursor = "pointer";
+		Tous.style.backgroundColor = "#1D6154";
+		Tous.style.color = "#FFFFFF";
 		Tous.addEventListener("click", function(event) {
 			let gallery = document.getElementsByClassName("gallery");
 			let galleryWork = document.getElementsByClassName("galleryWork");
@@ -77,6 +79,7 @@ window.addEventListener("load", function (event) {
 	const openModale = document.getElementsByClassName("modifier")[0];
 	openModale.addEventListener("click", function (event) {
 		modale.style.display = "grid";
+		document.getElementsByTagName("html")[0].style.overflow = "hidden";
 		document.getElementsByTagName("body")[0].style.background = "rgb(0, 0, 0, 0.4)";
 	});
 });
@@ -119,6 +122,7 @@ window.addEventListener("load", function (event) {
 	addPhotoButton.addEventListener("click", function (event) {
 		addPhotoModale.style.display = "flex";
 		modale.style.display = "none";
+		document.getElementsByTagName("html")[0].style.overflow = "hidden";
 	});
 });
 
@@ -147,6 +151,7 @@ window.addEventListener("load", function (event) {
 	const closeModale = document.getElementsByClassName("fa-xmark")[0];
 	closeModale.addEventListener("click", function (event) {
 		modale.style.display = "none";
+		document.getElementsByTagName("html")[0].style.overflow = "visible";
 		document.getElementsByTagName("body")[0].style.background = "rgb(255, 255, 255)";
 	});
 });
@@ -159,6 +164,7 @@ window.addEventListener("load", function (event) {
 	returnModale.addEventListener("click", function (event) {
 		addPhotoModale.style.display = "none";
 		modale.style.display = "grid";
+		document.getElementsByTagName("html")[0].style.overflow = "visible";
 	});
 });
 
@@ -166,13 +172,19 @@ function addImage() {
 	const img = document.querySelector(".addPhotoImg");
 	const chooseFileInput = document.getElementsByClassName("chooseFile")[0];
 	chooseFileInput.addEventListener("change", function (event) {
-		const url = window.URL.createObjectURL(chooseFileInput.files[0])
-		img.src = url;
-		img.style.width = "220px";
-		img.style.height = "170px";
-		img.style.paddingTop = "0";
-		img.style.zIndex = "1";
-		checkFormComplete();
+		const newFile = chooseFileInput.files[0];
+		if(newFile.size > 4194304) {
+			document.querySelector(".errorMaxSizeFile").style.display = "block";
+		}
+		else{
+			const url = window.URL.createObjectURL(chooseFileInput.files[0])
+			img.src = url;
+			img.style.width = "220px";
+			img.style.height = "170px";
+			img.style.paddingTop = "0";
+			img.style.zIndex = "1";
+			checkFormComplete();
+		}
 	})
 };
 
@@ -290,6 +302,7 @@ window.addEventListener("load", function(event) {
 	const closeModale = document.getElementsByClassName("fa-xmark")[1];
 	closeModale.addEventListener("click", function (event) {
 		addPhotoModale.style.display = "none";
+		document.getElementsByTagName("html")[0].style.overflow = "visible";
 		document.getElementsByTagName("body")[0].style.background = "rgb(255, 255, 255)";
 		emptyForm();
 	});

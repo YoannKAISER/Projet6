@@ -346,6 +346,13 @@ li img {
     background-color: rgb(255, 255, 255);
     right: 25%;
     left: 25%;
+	max-height: 100vh;
+	overflow: scroll;
+}
+
+.errorMaxSizeFile {
+	display: none;
+	color: #e60606;
 }
 
 .modaleContent {
@@ -442,12 +449,11 @@ li img {
 	justify-content: space-evenly;
     width: 630px;
     height: 670px;
-    top: 370px;
+    top: 420px;
     left: 25%;
 	right: 25%;
     border-radius: 10px;
     background-color: rgb(255, 255, 255);
-	
 }
 
 .fa-arrow-left {
