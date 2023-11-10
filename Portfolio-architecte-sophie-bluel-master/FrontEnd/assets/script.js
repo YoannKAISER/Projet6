@@ -1,3 +1,10 @@
+let works = fetch("http://localhost:5678/api/works").then((works) =>
+  works.json()
+);
+let catégories = fetch("http://localhost:5678/api/categories").then((catégories) => 
+    catégories.json()
+);
+
 function filterColor(activeFilter) {
 	let categories = document.querySelector(".categories");
 	let colorSpan = categories.getElementsByTagName("span");
@@ -7,72 +14,68 @@ function filterColor(activeFilter) {
 		})
 		activeFilter.style.backgroundColor = "#1D6154";
 		activeFilter.style.color = "#FFFFFF";
-}
+};
 
-fetch("http://localhost:5678/api/categories")
-	.then(response => response.json())
-	.then(data => {
-		let portfolio = document.getElementById("portfolio");
-		const token = sessionStorage.getItem("token");
-		let categories = document.createElement("div");
-		categories.classList.add("categories");
-		if (token !== null) {
-		categories.style.display = "none";}
-		portfolio.appendChild(categories);
-		let Tous = document.createElement("span");
-		Tous.innerHTML = "Tous";
-		Tous.style.cursor = "pointer";
-		Tous.style.backgroundColor = "#1D6154";
-		Tous.style.color = "#FFFFFF";
-		Tous.addEventListener("click", function(event) {
+catégories.then((catégories) => {
+	let portfolio = document.getElementById("portfolio");
+	const token = sessionStorage.getItem("token");
+	let categories = document.createElement("div");
+	categories.classList.add("categories");
+	if (token !== null) {
+	categories.style.display = "none";}
+	portfolio.appendChild(categories);
+	let Tous = document.createElement("span");
+	Tous.innerHTML = "Tous";
+	Tous.style.cursor = "pointer";
+	Tous.style.backgroundColor = "#1D6154";
+	Tous.style.color = "#FFFFFF";
+	Tous.addEventListener("click", function(event) {
+		let gallery = document.getElementsByClassName("gallery");
+		let galleryWork = document.getElementsByClassName("galleryWork");
+		Array.from(galleryWork).forEach(function(work) {
+			let img = work.getElementsByTagName("img")[0];
+			work.classList.remove("unshow");
+		});
+		filterColor(Tous);
+	});
+	categories.appendChild(Tous);
+	catégories.forEach(element => {
+		let span = document.createElement("span");
+		span.innerHTML = element.name;
+		span.dataset.idCategory = element.id;
+		span.style.cursor = "pointer";
+		span.addEventListener("click", function(event) {
 			let gallery = document.getElementsByClassName("gallery");
 			let galleryWork = document.getElementsByClassName("galleryWork");
 			Array.from(galleryWork).filter(function(work) {
 				let img = work.getElementsByTagName("img")[0];
-				work.classList.remove("unshow");
+				if (img.dataset.categoryId != event.target.dataset.idCategory) {
+					work.classList.add("unshow")
+				}
+				else {work.classList.remove("unshow")};
 			});
-			filterColor(Tous);
+			filterColor(span);
 		});
-		categories.appendChild(Tous);
-		data.forEach(element => {
-			let span = document.createElement("span");
-			span.innerHTML = element.name;
-			span.dataset.idCategory = element.id;
-			span.style.cursor = "pointer";
-			span.addEventListener("click", function(event) {
-				let gallery = document.getElementsByClassName("gallery");
-				let galleryWork = document.getElementsByClassName("galleryWork");
-				Array.from(galleryWork).filter(function(work) {
-					let img = work.getElementsByTagName("img")[0];
-					if (img.dataset.categoryId != event.target.dataset.idCategory) {
-						work.classList.add("unshow")
-					}
-					else {work.classList.remove("unshow")};
-				});
-				filterColor(span);
-			});
-			categories.appendChild(span);
-		});
+		categories.appendChild(span);
 	});
+});
 
-    fetch("http://localhost:5678/api/works")
-	.then(response => response.json())
-	.then(data => {
-		let gallery = document.getElementsByClassName("gallery")[0];
-		data.forEach(element => {
-			let newDiv = document.createElement("div");
-			newDiv.classList.add("galleryWork");
-			newDiv.dataset.projetId = element.id;
-			let img = document.createElement("img");
-			img.src = element.imageUrl;
-			img.dataset.categoryId = element.categoryId;
-			newDiv.appendChild(img);
-			let title = document.createElement("h3");
-			title.innerHTML = element.title;
-			newDiv.appendChild(title);
-			gallery.appendChild(newDiv);
-		});
+works.then((works) => {
+	let gallery = document.getElementsByClassName("gallery")[0];
+	works.forEach(element => {
+		let newDiv = document.createElement("div");
+		newDiv.classList.add("galleryWork");
+		newDiv.dataset.projetId = element.id;
+		let img = document.createElement("img");
+		img.src = element.imageUrl;
+		img.dataset.categoryId = element.categoryId;
+		newDiv.appendChild(img);
+		let title = document.createElement("h3");
+		title.innerHTML = element.title;
+		newDiv.appendChild(title);
+		gallery.appendChild(newDiv);
 	});
+});
 
 //Start modale
 window.addEventListener("load", function (event) {
@@ -105,16 +108,13 @@ function addPhotoToModale(element) {
 			trashCan.addEventListener("click", fetchDeleteWork);
 			trashCan.style.cursor = "pointer";
 			remove.appendChild(trashCan);
-}
+};
 
-
-fetch("http://localhost:5678/api/works")
-	.then(response => response.json())
-	.then(data => {
-		data.forEach(element => {
-		addPhotoToModale(element);
-		});
+works.then((works) => {
+	works.forEach(element => {
+	addPhotoToModale(element);
 	});
+});
 
 window.addEventListener("load", function (event) {
 	const addPhotoButton = document.getElementsByClassName("addPhoto")[0];
@@ -134,18 +134,19 @@ function fetchDeleteWork(event) {
 		method: 'DELETE',
 		headers: { "accept": "application/json", "Content-Type": "application/json", "Authorization": "Bearer " + token },
 	})
-		.then(response => {
-			if (response.ok) {
-				console.log("réussite");
-				projet.style.display = "none";
-				let gallerie = document.getElementsByClassName("gallery")[0];
-				let workDelete = gallerie.querySelector("[data-projet-id='" + id + "']");
-				console.log(workDelete);
-				workDelete.style.display = "none";
-			}
-			else { console.log("échec"); }
-		})
-}
+	.then(response => {
+		if (response.ok) {
+			console.log("réussite");
+			projet.style.display = "none";
+			let gallerie = document.getElementsByClassName("gallery")[0];
+			location.reload();
+			let workDelete = gallerie.querySelector("[data-projet-id='" + id + "']");
+			console.log(workDelete);
+			workDelete.style.display = "none";
+		}
+		else { console.log("échec"); }
+	})
+};
 
 window.addEventListener("load", function (event) {
 	const closeModale = document.getElementsByClassName("fa-xmark")[0];
@@ -165,6 +166,7 @@ window.addEventListener("load", function (event) {
 		addPhotoModale.style.display = "none";
 		modale.style.display = "grid";
 		document.getElementsByTagName("html")[0].style.overflow = "visible";
+		emptyForm();
 	});
 });
 
@@ -183,16 +185,14 @@ function addImage() {
 			img.style.height = "170px";
 			img.style.paddingTop = "0";
 			img.style.zIndex = "1";
+			document.querySelector(".errorMaxSizeFile").style.display = "none";
 			checkFormComplete();
 		}
-	})
+	});
 };
 
 window.addEventListener("load", function (event) {
 	addImage();
-	const titleInput = document.getElementById("title");
-	const categorySelect = document.getElementById("categorie");
-	const validButton = document.getElementsByClassName("validButton")[0];
 	const addWorkForm = document.getElementById("addWorkForm");
 	addWorkForm.addEventListener("change", function(event) {
 		checkFormComplete();
@@ -211,7 +211,7 @@ function checkFormComplete() {
 			validButton.disabled = false;
 			validButton.style.cursor = "pointer";
 		}
-		if (chooseFileInput.value === "" || titleInput.value === "" || categorySelect.value === "") {
+		else {
 			validButton.style.background = "rgb(167, 167, 167)";
 			validButton.disabled = true;
 			validButton.style.cursor = "default";
@@ -219,14 +219,9 @@ function checkFormComplete() {
 };
 
 function fillSelectCategorieOptions() {
-	fetch("http://localhost:5678/api/categories", {
-	method: 'GET',
-	headers: {"accept": "application/json", "Content-Type": "application/json" }
-	})
-	.then(response => response.json())
-	.then(data => {
+	catégories.then((catégories) => {
 		let inputSelect = document.getElementById("categorie");
-		data.forEach(element => {
+		catégories.forEach(element => {
 			let categorieSelect = document.createElement("option"); 
 			categorieSelect.innerHTML = element.name;
 			categorieSelect.value = element.id;
@@ -272,6 +267,9 @@ function sendWork(image, title, categorie) {
 			let imgAdd = document.createElement("img");
 			imgAdd.src = data.imageUrl;
 			workAdd.appendChild(imgAdd);
+			let titre = document.createElement("h3");
+			titre.innerHTML = data.title;
+			workAdd.appendChild(titre);
 			workAdd.style.display = "grid";
 			addPhotoModale.style.display = "none";
 			modale.style.display = "grid";
@@ -296,7 +294,7 @@ function emptyForm() {
 	img.style.height = "55px";
 	img.style.paddingTop = "20px";
 
-}
+};
 
 window.addEventListener("load", function(event) {
 	const closeModale = document.getElementsByClassName("fa-xmark")[1];

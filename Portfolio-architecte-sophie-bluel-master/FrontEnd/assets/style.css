@@ -351,11 +351,6 @@ li img {
 	overflow: scroll;
 }
 
-.errorMaxSizeFile {
-	display: none;
-	color: #e60606;
-}
-
 .modaleContent {
     border-bottom: 1px solid #b3b3b3;
     padding-bottom: 70px;
@@ -548,6 +543,11 @@ li img {
     flex-direction: column;
     border-bottom: 1px solid #b3b3b3;
     padding-bottom: 50px;
+}
+
+.errorMaxSizeFile {
+	display: none;
+	color: #e60606;
 }
 
 label {
